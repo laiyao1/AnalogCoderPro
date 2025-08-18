@@ -11,6 +11,7 @@
 
 [[Paper](https://arxiv.org/abs/2508.02518)]
 
+This work is an extension of [AnalogCoder](https://arxiv.org/abs/2405.14918) (AAAI 2025).
 # Overview
 
 - **Challenge**: Analog front-end design still relies heavily on expert intuition and iterative simulations, with limited automation.  
@@ -35,26 +36,71 @@
 
 # Waveform Examples
 
-Here are some example waveforms:
+Here are example waveforms for different circuit types, demonstrating the appropriate analysis methods for each design.
 
+---
 
-### Mixer
-<img src="sample_design/p19/p19_waveform.png" alt="p19 Waveform" style="width:80%;">
+## Mixer
+**Analysis Type:** Transient + FFT Spectrum
 
-### Schmitt Trigger
-<img src="sample_design/p28/p28_waveform.png" alt="p28 Waveform" style="width:80%;">
+<div align="center">
+  <img src="sample_design/p19/p19_waveform.png" alt="Mixer Circuit Waveform - Transient and FFT Analysis" style="width:85%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+</div>
 
-### Oscillator
-<img src="sample_design/p22/p22_waveform.png" alt="p22 Waveform" style="width:80%;">
+---
 
-### Integrator
-<img src="sample_design/p24/p24_waveform.png" alt="p24 Waveform" style="width:80%;">
+## Schmitt Trigger  
+**Analysis Type:** Transient + DC Transfer
 
-### Differentiator
-<img src="sample_design/p25/p25_waveform.png" alt="p25 Waveform" style="width:80%;">
+<div align="center">
+  <img src="sample_design/p28/p28_waveform.png" alt="Schmitt Trigger Circuit Waveform" style="width:85%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+</div>
 
-### BandStop Filter
-<img src="sample_design/p13/p13_waveform.png" alt="p13 Waveform" style="width:80%;">
+---
+
+## Oscillator
+**Analysis Type:** Transient
+
+<div align="center">
+  <img src="sample_design/p22/p22_waveform.png" alt="Oscillator Circuit Waveform" style="width:85%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+</div>
+
+---
+
+## Integrator
+**Analysis Type:** Transient
+
+<div align="center">
+  <img src="sample_design/p24/p24_waveform.png" alt="Integrator Circuit Waveform" style="width:85%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+</div>
+
+---
+
+## Differentiator
+**Analysis Type:** Transient
+
+<div align="center">
+  <img src="sample_design/p25/p25_waveform.png" alt="Differentiator Circuit Waveform" style="width:85%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+</div>
+
+---
+
+## BandStop Filter
+**Analysis Type:** AC
+
+<div align="center">
+  <img src="sample_design/p13/p13_waveform.png" alt="BandStop Filter Frequency Response" style="width:85%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+</div>
+
+---
+
+## Comparator
+**Analysis Type:** DC Sweep
+
+<div align="center">
+  <img src="sample_design/p9/p9_waveform.png" alt="Comparator DC Sweep Analysis" style="width:85%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+</div>
+
 
 # Citation
 If you find our work beneficial, we would be grateful if you considered citing our paper.
