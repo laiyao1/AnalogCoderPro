@@ -1,7 +1,7 @@
 # AnalogCoder-Pro: Unifying Analog Circuit Generation and Optimization via Multi-modal LLMs
 
 
-[Yao Lai](https://laiyao1.github.io/)<sup>1</sup>, [Sungyoung Lee](https://brianlsy98.github.io/)<sup>2</sup>, [Guojin Chen](https://gjchen.me/)<sup>3</sup>, [Souradip Poddar](https://www.linkedin.com/in/souradip-poddar-52376212a/)<sup>2</sup>, [Mengkang Hu](https://aaron617.github.io/)<sup>1</sup>, [Bei Yu](https://www.cse.cuhk.edu.hk/~byu/)<sup>3</sup>, [David Z. Pan](https://users.ece.utexas.edu/~dpan/)<sup>2</sup>, [Ping Luo](http://luoping.me/)<sup>1</sup>.
+[Yao Lai](https://laiyao1.github.io/)<sup>1</sup>, [Souradip Poddar](https://www.linkedin.com/in/souradip-poddar-52376212a/)<sup>2</sup>, [Sungyoung Lee](https://brianlsy98.github.io/)<sup>2</sup>, [Guojin Chen](https://gjchen.me/)<sup>3</sup>, [Mengkang Hu](https://aaron617.github.io/)<sup>1</sup>, [Bei Yu](https://www.cse.cuhk.edu.hk/~byu/)<sup>3</sup>, [David Z. Pan](https://users.ece.utexas.edu/~dpan/)<sup>2</sup>, [Ping Luo](http://luoping.me/)<sup>1</sup>.
 
 <sup>1</sup> The University of Hong Kong,
 <sup>2</sup> The University of Texas at Austin,
