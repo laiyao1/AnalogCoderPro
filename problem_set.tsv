@@ -1,0 +1,45 @@
+Id	Level	Circuit	Input	Output	Type	Submodule Name	Testbench	Normal
+1	Easy	a single-stage common-source amplifier with resistive load R	Vin	Vout	Amplifier	SingleStageAmp	NA	NA
+2	Easy	A three-stage amplifier with single input and output (each stage is common-source with resistive load)	Vin	Vout	Amplifier	ThreeStageAmp	NA	NA
+3	Easy	A common-drain amplifier (a.k.a. a source follower) with resistive load R (output Vout at the source)	Vin	Vout	Amplifier	CommonDrainAmp	NA	NA
+4	Easy	A single-stage common-gate amplifier with resistive load R (input signal Vin must be applied at the source terminal)	Vin, Vbias	Vout	Amplifier	CommonGateAmp	NA	NA
+5	Easy	A single-stage cascode amplifier with two NMOS transistors provides a single-ended output through a resistive load R	Vin, Vbias	Vout	Amplifier	SingleStageCascodeAmp	NA	NA
+6	Easy	A NMOS inverter with resistive load R	Vin	Vout	Inverter	NMOSInverter	NA	NA
+7	Easy	A logical inverter with 1 NMOS and 1 PMOS	Vin	Vout	Inverter	LogicalInverter	NA	NA
+8	Easy	A simple NMOS constant current source with resistive load R	Vbias	Vout	CurrentMirror	NMOSConstantCurrentSource	NA	NA
+9	Hard	an op-amp comparator to make the output high when Vin > Vref and low when Vin < Vref	Vin	Vout	Comparator	Unknown	The testbench applies a 0-5V sweep signal to Vin.	Vout should transition sharply from low to high when the input voltage exceeds the reference voltage, producing a digital signal with two states.
+10	Hard	a passive low-pass filter	Vin	Vout	LowPass	Unknown	The testbench applies a 1Hz-1GHz frequency sweep signal to Vin.	Vout should show minimal attenuation at low frequencies and progressively decrease in amplitude as frequency increases.
+11	Hard	a passive high-pass filter	Vin	Vout	HighPass	Unknown	The testbench applies a 1Hz-1GHz frequency sweep signal to Vin.	Vout should show significant attenuation at low frequencies and increase to full amplitude at higher frequencies.
+12	Hard	a passive band-pass filter	Vin	Vout	BandPass	Unknown	The testbench applies a 1Hz-1GHz frequency sweep signal to Vin.	Vout should show attenuation at both low and high frequencies, with maximum amplitude occurring within a specific frequency range.
+13	Hard	a passive band-stop filter	Vin	Vout	BandStop	Unknown	The testbench applies a 1Hz-1GHz frequency sweep signal to Vin.	Vout should show normal signal transmission across most frequencies but exhibit a distinct attenuation within a specific frequency range.
+14	Medium	A two-stage amplifier with a Miller compensation capacitor	Vin	Vout	Amplifier	TwoStageOpampMiller	NA	NA
+15	Medium	A single-stage amplifier (common-source with PMOS diode-connected load (gate and drain are shorted))	Vin	Vout	Amplifier	CommonSourceAmpDiodeLoad	NA	NA
+16	Medium	A differential opamp with an active PMOS current mirror load, a tail current source, and two outputs	Vinp, Vinn, Vbias	Voutp, Vout	Opamp	SingleStageOpamp	NA	NA
+17	Medium	A cascode current mirror with 4 mosfets (2 stacked at input side with diode-connected, 2 stacked at output side), reference current source input Iref (connected to Vdd) and resistive load R	Iref	Iout	CurrentMirror	CascodeCurrentMirror	NA	NA
+18	Medium	A single-stage differential common-source opamp with dual resistive loads, tail current, and a single output	Vinp, Vinn	Vout	Opamp	SingleStageDiffCommonSourceOpamp	NA	NA
+19	Hard	A Gilbert cell mixer to make Voutp - Voutn ∝ (Vrfp - Vrfn) × (Vlop - Vlon)	Vrfp, Vrfn, Vlop, Vlon	Voutp, Voutn	Mixer	Unknown	The testbench provides two sets of differential input signals to the Gilbert Cell mixer: 1.2kHz LO signals (Vlop-Vlon) and 1kHz RF signals (Vrfp-Vrfn).	The Voutp and Voutn differential outputs should produce an FFT spectrum showing two primary mixing products: a 200Hz component representing down-conversion (|LO-RF|) and a 2.2kHz component representing up-conversion (LO+RF).
+20	Hard	A two-stage differential opamp (first stage: common-source with an active load and a tail current, second stage: common-source with an active load)	Vinp, Vinn, Vbias1, Vbias2, Vbias3	Voutp, Vout	Opamp	OpampResistanceLoad	NA	NA
+21	Hard	A single-stage telescopic cascode opamp with two outputs (4 nmos as cascode input pair, 4 pmos as cascode loads, and 1 tail current)	Vinp, Vinn, Vbias1, Vbias2, Vbias3, Vbias4	Voutp, Vout	Opamp	SingleStageDiffOpamp	NA	NA
+22	Hard	An RC phase-shift oscillator	-	Vout	Oscillator	Unknown	The testbench initializes the op-amp non-inverting input (Vinp) to 2.51V and the inverting input (Vinn) to 2.5V.	Vout should exhibit periodic oscillations.
+23	Hard	A Wien Bridge oscillator	-	Vout	Oscillator	Unknown	The testbench initializes the op-amp non-inverting input (Vinp) to 2.51V and the inverting input (Vinn) to 2.5V.	Vout should exhibit periodic oscillations.
+24	Hard	An Opamp integrator with resistor R1 and capacitor Cf	Vin	Vout	Integrator	Unknown	The testbench inputs a square wave to Vin.	Vout should output a triangle wave.
+25	Hard	An Opamp differentiator with resistor Rf and capacitor C1	Vin	Vout	Differentiator	Unknown	The testbench inputs a triangle wave to Vin.	Vout should output a square wave.
+26	Hard	An Opamp adder to make Vout=-(Vin1+Vin2)	Vin1, Vin2	Vout	Adder	Unknown	NA	NA
+27	Hard	An Op-amp subtractor to make Vout=Vin2-Vin1	Vin1, Vin2	Vout	Subtractor	Unknown	NA	NA
+28	Hard	A non-inverting Schmitt trigger with positive feedback op-map	Vin	Vout	Schmitt	Unknown	The testbench inputs a sine wave at Vin.	The output (Vout) should be a square wave.
+51	Opt	a single-stage amplifier topology that maximizes voltage gain (preventing positive feedback)	Vin	Vout	Amplifier	Unknown	NA	NA
+52	Opt	a single-stage opamp topology that maximizes voltage gain (preventing positive feedback)	Vinp, Vinn	Vout	Opamp	Unknown	NA	NA
+53	Opt	a multi-stage amplifier topology that maximizes voltage gain (preventing positive feedback)	Vin	Vout	Amplifier	Unknown	NA	NA
+54	Opt	a multi-stage opamp topology that maximizes voltage gain (preventing positive feedback)	Vinp, Vinn	Vout	Opamp	Unknown	NA	NA
+55	Opt	a single-stage amplifier topology that maximizes Gain-Bandwidth Product (GBW) (preventing positive feedback)	Vin	Vout	Amplifier	Unknown	NA	NA
+56	Opt	a single-stage opamp topology that maximizes Gain-Bandwidth Product (GBW) (preventing positive feedback)	Vinp, Vinn	Vout	Opamp	Unknown	NA	NA
+57	Opt	a multi-stage amplifier topology that maximizes Gain-Bandwidth Product (GBW) (preventing positive feedback)	Vin	Vout	Amplifier	Unknown	NA	NA
+58	Opt	a multi-stage opamp topology that maximizes Gain-Bandwidth Product (GBW) (preventing positive feedback)	Vinp, Vinn	Vout	Opamp	Unknown	NA	NA
+59	Opt	a single-stage amplifier topology that maximizes GBW/Power (FoM) (preventing positive feedback)	Vin	Vout	Amplifier	Unknown	NA	NA
+60	Opt	a single-stage opamp topology that maximizes GBW/Power (FoM) (preventing positive feedback)	Vinp, Vinn	Vout	Opamp	Unknown	NA	NA
+61	Opt	a multi-stage amplifier topology that maximizes GBW/Power (FoM) (preventing positive feedback)	Vin	Vout	Amplifier	Unknown	NA	NA
+62	Opt	a multi-stage opamp topology that maximizes GBW/Power (FoM) (preventing positive feedback)	Vinp, Vinn	Vout	Opamp	Unknown	NA	NA
+63	Opt	a single-stage amplifier (preventing positive feedback)	Vin	Vout	Amplifier	Unknown	NA	NA
+64	Opt	a single-stage opamp (preventing positive feedback)	Vinp, Vinn	Vout	Opamp	Unknown	NA	NA
+65	Opt	a multi-stage amplifier (preventing positive feedback)	Vin	Vout	Amplifier	Unknown	NA	NA
+66	Opt	a multi-stage opamp (preventing positive feedback)	Vinp, Vinn	Vout	Opamp	Unknown	NA	NA
