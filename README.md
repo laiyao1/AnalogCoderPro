@@ -33,6 +33,28 @@
 - Sample circuits are in directory `sample_design`.
 - Test-benches are in directory `problem_check`.
 
+# Waveform Examples
+
+Here are some example waveforms:
+
+- **Mixer**  
+  ![p19 Waveform](sample_design/p19/p19_waveform.png)
+
+- **Schmitt Trigger**  
+  ![p28 Waveform](sample_design/p28/p28_waveform.png)
+
+- **Oscillator**  
+  ![p22 Waveform](sample_design/p22/p22_waveform.png)
+
+- **Integrator**  
+  ![p24 Waveform](sample_design/p24/p24_waveform.png)
+
+- **Differentiator**  
+  ![p25 Waveform](sample_design/p25/p25_waveform.png)
+
+- **BandStop Filter**  
+  ![p13 Waveform](sample_design/p13/p13_waveform.png)
+
 # Citation
 If you find our work beneficial, we would be grateful if you considered citing our paper.
 
