@@ -37,23 +37,24 @@
 
 Here are some example waveforms:
 
-- **Mixer**  
-  ![p19 Waveform](sample_design/p19/p19_waveform.png)
 
-- **Schmitt Trigger**  
-  ![p28 Waveform](sample_design/p28/p28_waveform.png)
+### Mixer
+<img src="sample_design/p19/p19_waveform.png" alt="p19 Waveform" style="width:80%;">
 
-- **Oscillator**  
-  ![p22 Waveform](sample_design/p22/p22_waveform.png)
+### Schmitt Trigger
+<img src="sample_design/p28/p28_waveform.png" alt="p28 Waveform" style="width:80%;">
 
-- **Integrator**  
-  ![p24 Waveform](sample_design/p24/p24_waveform.png)
+### Oscillator
+<img src="sample_design/p22/p22_waveform.png" alt="p22 Waveform" style="width:80%;">
 
-- **Differentiator**  
-  ![p25 Waveform](sample_design/p25/p25_waveform.png)
+### Integrator
+<img src="sample_design/p24/p24_waveform.png" alt="p24 Waveform" style="width:80%;">
 
-- **BandStop Filter**  
-  ![p13 Waveform](sample_design/p13/p13_waveform.png)
+### Differentiator
+<img src="sample_design/p25/p25_waveform.png" alt="p25 Waveform" style="width:80%;">
+
+### BandStop Filter
+<img src="sample_design/p13/p13_waveform.png" alt="p13 Waveform" style="width:80%;">
 
 # Citation
 If you find our work beneficial, we would be grateful if you considered citing our paper.
