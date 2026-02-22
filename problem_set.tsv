@@ -27,6 +27,7 @@ Id	Level	Circuit	Input	Output	Type	Submodule Name	Testbench	Normal
 26	Hard	An Opamp adder to make Vout=-(Vin1+Vin2)	Vin1, Vin2	Vout	Adder	Unknown	NA	NA
 27	Hard	An Op-amp subtractor to make Vout=Vin2-Vin1	Vin1, Vin2	Vout	Subtractor	Unknown	NA	NA
 28	Hard	A non-inverting Schmitt trigger with positive feedback op-map	Vin	Vout	Schmitt	Unknown	The testbench inputs a sine wave at Vin.	The output (Vout) should be a square wave.
+29	Hard	a Wien-bridge voltage‑controlled oscillator (Op-Amp based, RC network, no diodes)	Vin, Vctrl	Vout	VCO	Unknown	The testbench initializes the op-amp non-inverting input (Vinp) to 2.51V and the inverting input (Vinn) to 2.5V.	Vout should oscillate periodically, with its frequency varying according to Vctrl.
 51	Opt	a single-stage amplifier topology that maximizes voltage gain (preventing positive feedback)	Vin	Vout	Amplifier	Unknown	NA	NA
 52	Opt	a single-stage opamp topology that maximizes voltage gain (preventing positive feedback)	Vinp, Vinn	Vout	Opamp	Unknown	NA	NA
 53	Opt	a multi-stage amplifier topology that maximizes voltage gain (preventing positive feedback)	Vin	Vout	Amplifier	Unknown	NA	NA

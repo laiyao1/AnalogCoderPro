@@ -11,7 +11,7 @@
 
 [[Paper](https://arxiv.org/abs/2508.02518)]
 
-This work is an extension of [AnalogCoder](https://arxiv.org/abs/2405.14918) (AAAI 2025).
+This work is an extension of [AnalogCoder](https://arxiv.org/abs/2405.14918) (AAAI 2025) [[repo](https://github.com/laiyao1/AnalogCoder)].
 
 # 🎯 Overview
 
@@ -27,84 +27,53 @@ This work is an extension of [AnalogCoder](https://arxiv.org/abs/2405.14918) (AA
 
 # ✅ Project Checklist
 
-- [ ] Update the the LLM run scripts.
+- [x] Update the LLM run scripts.
 - [x] Update the sample waveform figures.
+- [] Update the BO optimization.
+- [] Update all ablation study prompts.
 
 # 🧪 Benchmark
-- Task descriptions are in `problem_set.tsv`.
-- Sample circuits are in directory `sample_design`.
-- Test-benches are in directory `problem_check`.
+- Task descriptions are in the file `problem_set.tsv`.
+- Sample circuits are in the `sample_design` directory.
+- Test benches are in the `problem_check` directory.
+
+# Environment Settings
+
+```
+git clone git@github.com:laiyao1/AnalogCoderPro.git
+cd AnalogCoderPro
+conda create -n analog python==3.10
+conda activate analog
+pip install matplotlib pandas numpy scipy openai
+conda install -c conda-forge ngspice -y
+conda install -c conda-forge pyspice
+```
+
+# Quick Start
+```
+python run.py --task_id=19 --num_per_task=3  --model=gpt-5-mini --api_key="[API_KEY]" --base_url="[BASE_URL]"
+```
+This script will attempt Mixer generation 3 times.
+The mapping of task IDs can be found in `problem_set.tsv`.
 
 # 📊 Waveform Gallery
 
 Here are example waveforms for different circuit types, demonstrating the appropriate analysis methods for each design.
 
----
-
-## Mixer
-**Analysis Type:** Transient + FFT Spectrum
-
-<div align="center">
-  <img src="sample_design/p19/p19_waveform.png" alt="Mixer Circuit Waveform - Transient and FFT Analysis" style="width:65%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-</div>
-
----
-
-## Schmitt Trigger  
-**Analysis Type:** Transient + DC Transfer
-
-<div align="center">
-  <img src="sample_design/p28/p28_waveform.png" alt="Schmitt Trigger Circuit Waveform" style="width:65%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-</div>
-
----
-
-## Oscillator
-**Analysis Type:** Transient
-
-<div align="center">
-  <img src="sample_design/p22/p22_waveform.png" alt="Oscillator Circuit Waveform" style="width:65%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-</div>
-
----
-
-## Integrator
-**Analysis Type:** Transient
-
-<div align="center">
-  <img src="sample_design/p24/p24_waveform.png" alt="Integrator Circuit Waveform" style="width:65%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-</div>
-
----
-
-## Differentiator
-**Analysis Type:** Transient
-
-<div align="center">
-  <img src="sample_design/p25/p25_waveform.png" alt="Differentiator Circuit Waveform" style="width:65%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-</div>
-
----
-
-## BandStop Filter
-**Analysis Type:** AC
-
-<div align="center">
-  <img src="sample_design/p13/p13_waveform.png" alt="BandStop Filter Frequency Response" style="width:65%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-</div>
-
----
-
-## Comparator
-**Analysis Type:** DC Sweep
-
-<div align="center">
-  <img src="sample_design/p9/p9_waveform.png" alt="Comparator DC Sweep Analysis" style="width:65%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-</div>
+| | |
+|:---:|:---:|
+| **Mixer** — Transient + FFT Spectrum | **Schmitt Trigger** — Transient + DC Transfer |
+| <img src="sample_design/p19/p19_waveform.png" alt="Mixer" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> | <img src="sample_design/p28/p28_waveform.png" alt="Schmitt Trigger" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> |
+| **Oscillator** — Transient | **Integrator** — Transient |
+| <img src="sample_design/p22/p22_waveform.png" alt="Oscillator" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> | <img src="sample_design/p24/p24_waveform.png" alt="Integrator" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> |
+| **Differentiator** — Transient | **BandStop Filter** — AC |
+| <img src="sample_design/p25/p25_waveform.png" alt="Differentiator" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> | <img src="sample_design/p13/p13_waveform.png" alt="BandStop Filter" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> |
+| **Comparator** — DC Sweep | |
+| <img src="sample_design/p9/p9_waveform.png" alt="Comparator" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> | |
 
 
 # 📚 Citation
-If you find our work beneficial, we would be grateful if you considered citing our paper.
+If you find our work useful, we would appreciate a citation of our paper.
 
 
 ```
