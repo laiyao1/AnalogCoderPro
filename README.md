@@ -60,16 +60,41 @@ The mapping of task IDs can be found in `problem_set.tsv`.
 
 Here are example waveforms for different circuit types, demonstrating the appropriate analysis methods for each design.
 
-| | |
-|:---:|:---:|
-| **Mixer** — Transient + FFT Spectrum | **Schmitt Trigger** — Transient + DC Transfer |
-| <img src="sample_design/p19/p19_waveform.png" alt="Mixer" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> | <img src="sample_design/p28/p28_waveform.png" alt="Schmitt Trigger" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> |
-| **Oscillator** — Transient | **Integrator** — Transient |
-| <img src="sample_design/p22/p22_waveform.png" alt="Oscillator" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> | <img src="sample_design/p24/p24_waveform.png" alt="Integrator" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> |
-| **Differentiator** — Transient | **BandStop Filter** — AC |
-| <img src="sample_design/p25/p25_waveform.png" alt="Differentiator" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> | <img src="sample_design/p13/p13_waveform.png" alt="BandStop Filter" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> |
-| **Comparator** — DC Sweep | |
-| <img src="sample_design/p9/p9_waveform.png" alt="Comparator" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"> | |
+<table>
+<colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+<tr>
+<td align="center"><strong>Mixer</strong> — Transient + FFT Spectrum</td>
+<td align="center"><strong>Schmitt Trigger</strong> — Transient + DC Transfer</td>
+</tr>
+<tr>
+<td align="center"><img src="sample_design/p19/p19_waveform.png" alt="Mixer" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></td>
+<td align="center"><img src="sample_design/p28/p28_waveform.png" alt="Schmitt Trigger" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></td>
+</tr>
+<tr>
+<td align="center"><strong>Oscillator</strong> — Transient</td>
+<td align="center"><strong>Integrator</strong> — Transient</td>
+</tr>
+<tr>
+<td align="center"><img src="sample_design/p22/p22_waveform.png" alt="Oscillator" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></td>
+<td align="center"><img src="sample_design/p24/p24_waveform.png" alt="Integrator" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></td>
+</tr>
+<tr>
+<td align="center"><strong>Differentiator</strong> — Transient</td>
+<td align="center"><strong>BandStop Filter</strong> — AC</td>
+</tr>
+<tr>
+<td align="center"><img src="sample_design/p25/p25_waveform.png" alt="Differentiator" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></td>
+<td align="center"><img src="sample_design/p13/p13_waveform.png" alt="BandStop Filter" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></td>
+</tr>
+<tr>
+<td align="center"><strong>Comparator</strong> — DC Sweep</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><img src="sample_design/p9/p9_waveform.png" alt="Comparator" style="width:95%; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></td>
+<td align="center"></td>
+</tr>
+</table>
 
 
 # 📚 Citation
