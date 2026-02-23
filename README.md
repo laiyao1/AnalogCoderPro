@@ -29,8 +29,8 @@ This work is an extension of [AnalogCoder](https://arxiv.org/abs/2405.14918) (AA
 
 - [x] Update the LLM run scripts.
 - [x] Update the sample waveform figures.
-- [] Update the BO optimization.
-- [] Update all ablation study prompts.
+- [ ] Update the BO optimization.
+- [ ] Update all ablation study prompts.
 
 # 🧪 Benchmark
 - Task descriptions are in the file `problem_set.tsv`.
