@@ -9,9 +9,14 @@
 
 
 
-[[Paper](https://arxiv.org/abs/2508.02518)]
+[[Paper](https://ieeexplore.ieee.org/document/11432899)]
 
 This work is an extension of [AnalogCoder](https://arxiv.org/abs/2405.14918) (AAAI 2025) [[repo](https://github.com/laiyao1/AnalogCoder)].
+
+# 🔔 Updates
+
+- Our work has been accepted in **IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD) 2026**! 🎉 
+
 
 # 🎯 Overview
 
@@ -102,11 +107,24 @@ If you find our work useful, we would appreciate a citation of our paper.
 
 
 ```
-@misc{lai2025analogcoderpro,
-      title={AnalogCoder-Pro: Unifying Analog Circuit Generation and Optimization via Multi-modal LLMs}, 
-      author={Yao Lai and Souradip Poddar and Sungyoung Lee and Guojin Chen and Mengkang Hu and Bei Yu and Ping Luo and David Z. Pan},
-      year={2025},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
+
+@article{lai2025analogcoder,
+    title={AnalogCoder: Analog Circuit Design via Training-Free Code Generation},
+    volume={39},
+    DOI={10.1609/aaai.v39i1.32016},
+    number={1},
+    journal={Proceedings of the AAAI Conference on Artificial Intelligence},
+    author={Lai, Yao and Lee, Sungyoung and Chen, Guojin and Poddar, Souradip and Hu, Mengkang and Pan, David Z. and Luo, Ping},
+    year={2025},
+    pages={379-387}
 }
+
+@article{lai2026analogcoderpro,
+    author={Lai, Yao and Poddar, Souradip and Lee, Sungyoung and Chen, Guojin and Hu, Mengkang and Yu, Bei and Luo, Ping and Pan, David Z.},
+    journal={IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems}, 
+    title={AnalogCoder-Pro: Unifying Analog Circuit Generation and Optimization via Multi-modal LLMs}, 
+    year={2026},
+    doi={10.1109/TCAD.2026.3673493}
+}
+
 ```
