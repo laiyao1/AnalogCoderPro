@@ -63,8 +63,34 @@ The mapping of task IDs can be found in `problem_set.tsv`.
 
 # Device Sizing (Bayesian Optimization)
 
-The Optuna sizing stage, 45nm MOS models, and amplifier/op-amp examples are now
-included. For an existing parameterized circuit, run:
+**Automatic optimizer: set `--task_id` to 51–66 (inclusive) in the current
+benchmark.** `run.py` generates a circuit topology, checks its operating point
+and function, then parameterizes the successful circuit and runs the Optuna
+optimizer. Sizing starts only after the generated circuit passes these checks.
+Task IDs at or below 50 do not enable automatic sizing. There is no `--optimize`
+CLI option.
+
+| `--task_id` | Automatic optimization objective |
+| --- | --- |
+| 51–54 | Voltage gain |
+| 55–58 | Gain-bandwidth product (GBW) |
+| 59–62 | Figure of merit (FoM) |
+| 63–66 | FoM (the default objective for these tasks) |
+
+For example, after configuring `OPENAI_API_KEY` (and optionally
+`OPENAI_BASE_URL`), generate and size one circuit for task 59:
+
+```bash
+python run.py --task_id=59 --num_per_task=1 --model=gpt-5-mini --no_vlm \
+  --sizing-trials=10 --sizing-jobs=1 --sizing-runs=1
+```
+
+Use `--sizing-trials`, `--sizing-jobs`, and `--sizing-runs` to control the trials
+per run, parallel jobs, and independent optimization runs. The command above
+makes model API calls and uses a small sizing budget for an initial check.
+
+To size an existing parameterized circuit directly, use the included amplifier
+or op-amp examples with the standalone optimizer:
 
 ```bash
 python optimize/circuit_optimizer_helper.py \
@@ -72,11 +98,8 @@ python optimize/circuit_optimizer_helper.py \
   --n-trials 10 --n-jobs 1 --output-dir results/amplifier
 ```
 
-For topology generation followed by sizing, use `run.py --task_id=59` and the
-`--sizing-trials`, `--sizing-jobs`, and `--sizing-runs` options. Tasks 51–66 enable
-sizing automatically; there is no `--optimize` option. See
-[the sizing guide](optimize/README.md) for installation, task/objective mapping,
-module requirements, and output descriptions.
+See [the sizing guide](optimize/README.md) for installation, objective definitions,
+module requirements, output descriptions, and integration test instructions.
 
 # 📊 Waveform Gallery
 
