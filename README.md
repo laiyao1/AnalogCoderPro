@@ -101,6 +101,24 @@ python optimize/circuit_optimizer_helper.py \
 See [the sizing guide](optimize/README.md) for installation, objective definitions,
 module requirements, output descriptions, and integration test instructions.
 
+## Spec-driven prompt comparison
+
+This case study compares GPT-5-mini circuits generated for task 59 (with an
+explicit FoM objective) and task 63 (without that objective). Each fixed topology
+was sized with the same 10 optimizer seeds (42–51), 1000 trials per seed, and a
+100 pF load. The main plot zooms into late-stage convergence; the inset retains
+the full scale.
+
+![Mean sizing convergence with and without the spec-driven prompt](docs/figures/spec_driven_convergence.png)
+
+Final mean FoM: **1876.371** with the spec-driven prompt and **1876.144** without.
+The mean paired difference is **+0.0121%** (95% descriptive interval:
+**−0.0465% to +0.0708%**). This single topology pair does not establish a stable
+benefit across independent model generations.
+[Figure data](docs/experiments/spec_driven_convergence.json) and
+[plotting script](docs/experiments/plot_spec_driven_convergence.py) are included
+for reproducibility.
+
 # 📊 Waveform Gallery
 
 Here are example waveforms for different circuit types, demonstrating the appropriate analysis methods for each design.
