@@ -83,7 +83,9 @@ class ScriptedClient:
         return types.SimpleNamespace(
             choices=[
                 types.SimpleNamespace(
-                    message=types.SimpleNamespace(content=f"```python\n{code}```")
+                    message=types.SimpleNamespace(
+                        content=code if parameterizing else f"```python\n{code}```"
+                    )
                 )
             ],
             usage=types.SimpleNamespace(

@@ -113,6 +113,9 @@ GPT-5 requests omit `temperature` because the reasoning defaults do not support
 that sampling parameter. Other models retain the configured temperature. All
 simulation subprocesses use the same Python interpreter as the runner.
 
+The runner accepts either fenced Python code blocks or complete plain Python
+responses when extracting generated circuits and parameterized modules.
+
 This workflow makes model API calls. It writes the parameterization prompt,
 answer, and `*_optimize.py` beside the generated topology, then launches the
 canonical optimizer with the same Python interpreter. Optimization failures are

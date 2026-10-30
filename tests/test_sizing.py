@@ -99,6 +99,49 @@ class SizingTests(unittest.TestCase):
                             "10p" if target == "gbw" else "100p",
                         )
 
+    def test_extracts_fenced_and_plain_python_responses(self):
+        tree = ast.parse((ROOT / "run.py").read_text())
+        function = next(
+            node
+            for node in tree.body
+            if isinstance(node, ast.FunctionDef) and node.name == "extract_code"
+        )
+        namespace = {
+            "ast": ast,
+            "re": __import__("re"),
+            "args": types.SimpleNamespace(ngspice=False),
+        }
+        exec(
+            compile(ast.Module(body=[function], type_ignores=[]), "run.py", "exec"),
+            namespace,
+        )
+        extract = namespace["extract_code"]
+        code = (
+            "def create_circuit(params):\n"
+            "    return params\n"
+            "initial_params = {'w': 1.0}\n"
+            "param_ranges_definition = {'w': {'min': 0.5, 'max': 2.0}}\n"
+        )
+        for response in (
+            code,
+            "```python\n" + code + "```",
+            "# parameterized circuit\n" + code,
+        ):
+            with self.subTest(response=response[:20]):
+                error, output = extract(response)
+                self.assertEqual(error, 0)
+                ast.parse(output)
+                self.assertIn("def create_circuit", output)
+                self.assertIn("initial_params", output)
+        for response in (
+            "",
+            "   ",
+            "Here is your corrected circuit.",
+            "hello",
+            "def broken(:",
+        ):
+            self.assertEqual(extract(response), (1, ""))
+
     def test_default_model_omits_unsupported_sampling_parameters(self):
         tree = ast.parse((ROOT / "run.py").read_text())
         function = next(

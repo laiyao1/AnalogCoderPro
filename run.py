@@ -1,6 +1,7 @@
 from openai import OpenAI
 import openai
 import argparse
+import ast
 import re
 import os
 import subprocess
@@ -105,38 +106,41 @@ def encode_image(image_path):
         return base64.b64encode(image_file.read()).decode('utf-8')
 
 def extract_code(generated_content):
-    empty_code_error = 0
-    assert generated_content != "", "generated_content is empty"
-    regex = r"```.*?\n(.*?)```"
-    matches = list(re.finditer(regex, generated_content, re.DOTALL))
-    
-    if not matches:
-        empty_code_error = 1
-        return empty_code_error, ""
+    """Extract fenced code or a complete, syntactically valid Python response."""
+    if not generated_content or not generated_content.strip():
+        return 1, ""
+    matches = list(re.finditer(r"```.*?\n(.*?)```", generated_content, re.DOTALL))
+    if matches:
+        code = matches[-1].group(1)
+    else:
+        code = generated_content.strip()
+        try:
+            module = ast.parse(code)
+        except SyntaxError:
+            return 1, ""
+        if not any(
+            isinstance(
+                node,
+                (ast.Import, ast.ImportFrom, ast.Assign, ast.FunctionDef, ast.ClassDef),
+            )
+            for node in module.body
+        ):
+            return 1, ""
 
-    last_match = matches[-1]
-    
-    try:
-        code = last_match.group(1)
-        code = "\n".join([line for line in code.split("\n") if len(line.strip()) > 0])
-    except:
-        code = ""
-        empty_code_error = 1
-        return empty_code_error, code
-
+    code = "\n".join(line for line in code.split("\n") if line.strip())
     if not args.ngspice:
         if "from PySpice.Spice.Netlist import Circuit" not in code:
             code = "from PySpice.Spice.Netlist import Circuit\n" + code
         if "from PySpice.Unit import *" not in code:
             code = "from PySpice.Unit import *\n" + code
-        
-    new_code = ""
+
+    new_code = []
     for line in code.split("\n"):
-        new_code += line + "\n"
+        new_code.append(line)
         if "circuit.simulator()" in line:
             break
+    return 0, "\n".join(new_code) + "\n"
 
-    return empty_code_error, new_code
 
 def run_code(file):
     simulation_error = 0
