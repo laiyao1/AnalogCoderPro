@@ -34,7 +34,7 @@ This work is an extension of [AnalogCoder](https://arxiv.org/abs/2405.14918) (AA
 
 - [x] Update the LLM run scripts.
 - [x] Update the sample waveform figures.
-- [ ] Update the BO optimization.
+- [x] Update the BO optimization.
 - [ ] Update all ablation study prompts.
 
 # 🧪 Benchmark
@@ -49,7 +49,7 @@ git clone git@github.com:laiyao1/AnalogCoderPro.git
 cd AnalogCoderPro
 conda create -n analog python==3.10
 conda activate analog
-pip install matplotlib pandas numpy scipy openai
+pip install -r requirements-sizing.txt
 conda install -c conda-forge ngspice -y
 conda install -c conda-forge pyspice
 ```
@@ -60,6 +60,22 @@ python run.py --task_id=19 --num_per_task=3  --model=gpt-5-mini --api_key="[API_
 ```
 This script will attempt Mixer generation 3 times.
 The mapping of task IDs can be found in `problem_set.tsv`.
+
+# Device Sizing (Bayesian Optimization)
+
+The Optuna sizing stage, 45nm MOS models, and amplifier/op-amp examples are now
+included. For an existing parameterized circuit, run:
+
+```bash
+python optimize/circuit_optimizer_helper.py \
+  optimize/examples/amplifier_optimize.py fom 1 \
+  --n-trials 10 --n-jobs 1 --output-dir results/amplifier
+```
+
+For topology generation followed by sizing, use `run.py --task_id=59` and the
+`--sizing-trials`, `--sizing-jobs`, and `--sizing-runs` options. See
+[the sizing guide](optimize/README.md) for installation, task/objective mapping,
+module requirements, and output descriptions.
 
 # 📊 Waveform Gallery
 

@@ -28,8 +28,13 @@ parser.add_argument("--port", type=int, default=5000)
 parser.add_argument("--no_vlm", action="store_true")
 parser.add_argument("--api_key", type=str, default=None, help="API key (or set OPENAI_API_KEY)")
 parser.add_argument("--base_url", type=str, default=None, help="API base URL (or set OPENAI_BASE_URL)")
+parser.add_argument("--sizing-trials", type=int, default=1000)
+parser.add_argument("--sizing-jobs", type=int, default=16)
+parser.add_argument("--sizing-runs", type=int, default=1)
 
 args = parser.parse_args()
+if min(args.sizing_trials, args.sizing_jobs, args.sizing_runs) < 1:
+    parser.error("sizing trials, jobs, and runs must be positive")
 args.api_key = args.api_key or os.environ.get("OPENAI_API_KEY", "")
 args.base_url = args.base_url or os.environ.get("OPENAI_BASE_URL")
 
@@ -798,12 +803,9 @@ def optimize_code(code_path, task_id, task_type, task):
             print("sleep 30s")
             time.sleep(30)
     answer_code_path = code_path.replace("_success.py", "_optimize.py")
-    answer_code_name = answer_code_path.split("/")[-1]
     with open(answer_code_path, 'w') as f:
         f.write(answer_code)
     
-    base_path = os.path.dirname(code_path)
-    shutil.copy("optimize/circuit_optimizer_helper.py", base_path)
     if "voltage gain" in task.lower():
         target = "gain"
     elif "gbw" in task.lower():
@@ -814,7 +816,13 @@ def optimize_code(code_path, task_id, task_type, task):
     else:
         target = "fom"
         
-    os.system(f"cd {base_path} && python circuit_optimizer_helper.py {answer_code_name} {target}")
+    optimizer_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "optimize", "circuit_optimizer_helper.py")
+    subprocess.run([
+        sys.executable, optimizer_path, os.path.abspath(answer_code_path), target,
+        str(args.sizing_runs), "--n-trials", str(args.sizing_trials),
+        "--n-jobs", str(args.sizing_jobs),
+    ], check=True)
 
     
 

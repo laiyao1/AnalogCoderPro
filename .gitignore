@@ -1,2 +1,23 @@
 run.sh
 gpt-5-mini/
+
+# Local configuration, Python caches, and generated sizing results
+.DS_Store
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.venv/
+results/
+*.pkl
+optuna_log_*.log
+*_run*_initial_params.txt
+*_multi_run_summary.json
+*_best_overall_result.txt
+*_best_overall_circuit.cir
+*_gain_plot.png
+multiple_runs_history.png
+optimization_history.png
+param_importance.png
+param_contour.png
