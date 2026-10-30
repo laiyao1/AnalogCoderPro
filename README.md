@@ -1,4 +1,4 @@
-# AnalogCoder-Pro: Unifying Analog Circuit Generation and Optimization via Multi-modal LLMs
+# AnalogCoder-Pro: Unifying Analog Circuit Generation and Optimization via Multimodal LLMs
 
 
 [Yao Lai](https://laiyao1.github.io/)<sup>1</sup>, [Souradip Poddar](https://www.linkedin.com/in/souradip-poddar-52376212a/)<sup>2</sup>, [Sungyoung Lee](https://brianlsy98.github.io/)<sup>2</sup>, [Guojin Chen](https://gjchen.me/)<sup>3</sup>, [Mengkang Hu](https://aaron617.github.io/)<sup>1</sup>, [Bei Yu](https://www.cse.cuhk.edu.hk/~byu/)<sup>3</sup>, [Ping Luo](http://luoping.me/)<sup>1</sup>, [David Z. Pan](https://users.ece.utexas.edu/~dpan/)<sup>2</sup>.
@@ -15,7 +15,7 @@ This work is an extension of [AnalogCoder](https://arxiv.org/abs/2405.14918) (AA
 
 # 🔔 Updates
 
-- Our work has been accepted in **IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD) 2026**! 🎉 
+- Our work appears in **IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD)**, **vol. 45, no. 11, pp. 5149–5162, November 2026**. [[Paper](https://doi.org/10.1109/TCAD.2026.3673493)]
 
 
 # 🎯 Overview
@@ -162,8 +162,12 @@ If you find our work useful, we would appreciate a citation of our paper.
 @article{lai2026analogcoderpro,
     author={Lai, Yao and Poddar, Souradip and Lee, Sungyoung and Chen, Guojin and Hu, Mengkang and Yu, Bei and Luo, Ping and Pan, David Z.},
     journal={IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems}, 
-    title={AnalogCoder-Pro: Unifying Analog Circuit Generation and Optimization via Multi-modal LLMs}, 
+    title={AnalogCoder-Pro: Unifying Analog Circuit Generation and Optimization via Multimodal LLMs},
     year={2026},
+    volume={45},
+    number={11},
+    pages={5149--5162},
+    month=nov,
     doi={10.1109/TCAD.2026.3673493}
 }
 
