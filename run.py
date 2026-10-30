@@ -38,8 +38,6 @@ if min(args.sizing_trials, args.sizing_jobs, args.sizing_runs) < 1:
 args.api_key = args.api_key or os.environ.get("OPENAI_API_KEY", "")
 args.base_url = args.base_url or os.environ.get("OPENAI_BASE_URL")
 
-if "gpt-5" in args.model:
-    args.temperature = 1
 if args.task_id > 50:
     args.temperature += 0.3
 
@@ -95,6 +93,13 @@ if not args.no_vlm:
     client_vlm = OpenAI(api_key=args.api_key, base_url=args.base_url)
 
 
+def sampling_options(model, temperature):
+    """Omit sampling parameters unsupported by GPT-5 reasoning defaults."""
+    if model.lower().startswith("gpt-5"):
+        return {}
+    return {"temperature": temperature}
+
+
 def encode_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
@@ -139,7 +144,7 @@ def run_code(file):
     execution_error_info = ""
     floating_node = ""
     try:
-        result = subprocess.run(["python", "-u", file], check=True, text=True,
+        result = subprocess.run([sys.executable, "-u", file], check=True, text=True,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=60, env=os.environ.copy())
         if len(result.stdout.split("\n")) >= 2 and ("failed" in result.stdout.split("\n")[-2] or "failed" in result.stdout.split("\n")[-1]):
             if len(result.stdout.split("\n")) >= 2:
@@ -442,7 +447,7 @@ def check_function(task_id, code_path, task_type):
     else:
         return 0, ""
     try:
-        result = subprocess.run(["python", "-u", fwrite_code_path], check=True, text=True,
+        result = subprocess.run([sys.executable, "-u", fwrite_code_path], check=True, text=True,
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=os.environ.copy())
         func_error = 0
         return_message = ""
@@ -787,7 +792,7 @@ def optimize_code(code_path, task_id, task_type, task):
                     {"role": "system", "content": "You are an analog integrated circuits expert."},
                     {"role": "user", "content": optimize_prompt}
                 ],
-                temperature=args.temperature)
+                **sampling_options(args.model, args.temperature))
             if completion is None or type(completion)== str or completion.choices[0].message.content is None:
                 time.sleep(30)
             else:
@@ -920,7 +925,7 @@ def work(task, input, output, task_id, it, background, task_type, flog = None,
             completion = client.chat.completions.create(
                 model=args.model,
                 messages=messages,
-                temperature=args.temperature
+                **sampling_options(args.model, args.temperature)
             )
             if completion is None or type(completion) == str or completion.choices[0].message.content is None:
                 time.sleep(30)
@@ -1067,7 +1072,7 @@ def work(task, input, output, task_id, it, background, task_type, flog = None,
                 fwrite_code_netlist.close()
                 
                 netlist_path = "{}/p{}/{}/p{}_{}_{}_netlist.sp".format(model_dir, task_id, it, task_id, it, code_id)
-                result = subprocess.run(["python", "-u", code_netlist_path], check=True, text=True, 
+                result = subprocess.run([sys.executable, "-u", code_netlist_path], check=True, text=True,
                     stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=os.environ.copy())
                 netlist_file_path = "{}/p{}/{}/p{}_{}_{}_netlist.sp".format(model_dir, task_id, it, task_id, it, code_id)
                 fwrite_netlist = open(netlist_file_path, 'w')
@@ -1093,7 +1098,7 @@ def work(task, input, output, task_id, it, background, task_type, flog = None,
                     fwrite_dc_sweep_code.write(dc_sweep_code)
                     fwrite_dc_sweep_code.close()
                     try:
-                        subprocess.run(["python", "-u", dc_sweep_code_path], check=True, text=True,
+                        subprocess.run([sys.executable, "-u", dc_sweep_code_path], check=True, text=True,
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=os.environ.copy())
                         target_voltage = 2.5 if not optimize else 0.6
                         dc_sweep_error, best_voltage = get_best_voltage(dc_file_path, target_voltage)
@@ -1120,7 +1125,7 @@ def work(task, input, output, task_id, it, background, task_type, flog = None,
                         fwrite_code_netlist.write(new_code_netlist)
                         fwrite_code_netlist.close()
                         netlist_path = "{}/p{}/{}/p{}_{}_{}_netlist.sp".format(model_dir, task_id, it, task_id, it, code_id)
-                        result = subprocess.run(["python", "-u", code_netlist_path], check=True, text=True, 
+                        result = subprocess.run([sys.executable, "-u", code_netlist_path], check=True, text=True,
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=os.environ.copy())
                         netlist_file_path = "{}/p{}/{}/p{}_{}_{}_netlist.sp".format(model_dir, task_id, it, task_id, it, code_id)
                         fwrite_netlist = open(netlist_file_path, 'w')
@@ -1235,7 +1240,7 @@ def work(task, input, output, task_id, it, background, task_type, flog = None,
                         completion_vlm = client_vlm.chat.completions.create(
                             model = vlm_model,
                             messages = messages_vlm,
-                            temperature = 0.0,
+                            **sampling_options(vlm_model, 0.0),
                         )
                         if (completion_vlm is None or
                             isinstance(completion_vlm, str) or
@@ -1292,7 +1297,7 @@ def work(task, input, output, task_id, it, background, task_type, flog = None,
                 completion = client.chat.completions.create(
                     model=args.model,
                     messages=messages,
-                    temperature=args.temperature
+                    **sampling_options(args.model, args.temperature)
                 )
                 if completion is None or type(completion) == str or completion.choices[0].message.content is None:
                     time.sleep(30)
@@ -1372,7 +1377,7 @@ def get_retrieval(task, task_id):
             completion = client.chat.completions.create(
                 model=args.model,
                 messages=messages,
-                temperature=args.temperature
+                **sampling_options(args.model, args.temperature)
             )
         except openai.APIStatusError as e:
             print("Encountered an APIStatusError. Details:")

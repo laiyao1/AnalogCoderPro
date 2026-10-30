@@ -98,7 +98,8 @@ they are not a reproduction of the paper's performance measurements.
 ## Generate and size a new topology
 
 The existing `run.py` invokes sizing automatically after an optimization task's
-generated circuit passes the function check. Configure the LLM via environment
+generated circuit passes the function check. Optimization is selected automatically
+by task IDs 51–66; there is no `--optimize` CLI option. Configure the LLM via environment
 variables or the existing `--api_key`/`--base_url` arguments:
 
 ```bash
@@ -107,6 +108,10 @@ export OPENAI_API_KEY="your-key"
 python run.py --task_id=59 --num_per_task=1 --model=gpt-5-mini \
   --sizing-trials=1000 --sizing-jobs=16 --sizing-runs=1
 ```
+
+GPT-5 requests omit `temperature` because the reasoning defaults do not support
+that sampling parameter. Other models retain the configured temperature. All
+simulation subprocesses use the same Python interpreter as the runner.
 
 This workflow makes model API calls. It writes the parameterization prompt,
 answer, and `*_optimize.py` beside the generated topology, then launches the
@@ -137,3 +142,17 @@ python -m unittest discover -s tests -v
 The regression checks cover generated parameter validation, source-safe output
 names, and the generation-to-sizing command. For an actual simulator smoke test,
 run the two short optimization commands above and inspect the reported metrics.
+
+To exercise the automatic generation-to-sizing runner with real ngspice:
+
+```bash
+ANALOGCODER_INTEGRATION=1 python -m unittest discover -s tests -v
+```
+
+The integration test supplies deterministic model responses and runs actual
+operating-point checks, DC sweeps, amplifier/op-amp function checks, and two-trial
+Optuna studies for tasks 51, 52, 55, 56, 59, and 60. It checks all three objective
+routes and verifies result files and plots. It also shadows `python` on PATH to
+verify that subprocesses use the runner's interpreter. No external model API is
+contacted: this validates orchestration and simulator integration, not live
+provider access, model-generated circuit quality, or paper performance results.

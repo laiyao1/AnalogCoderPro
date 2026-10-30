@@ -99,6 +99,23 @@ class SizingTests(unittest.TestCase):
                             "10p" if target == "gbw" else "100p",
                         )
 
+    def test_default_model_omits_unsupported_sampling_parameters(self):
+        tree = ast.parse((ROOT / "run.py").read_text())
+        function = next(
+            node
+            for node in tree.body
+            if isinstance(node, ast.FunctionDef) and node.name == "sampling_options"
+        )
+        namespace = {}
+        exec(
+            compile(ast.Module(body=[function], type_ignores=[]), "run.py", "exec"),
+            namespace,
+        )
+        options = namespace["sampling_options"]
+        for model in ("gpt-5-mini", "gpt-5-mini-2025-08-07", "gpt-5", "gpt-5.2"):
+            self.assertEqual(options(model, 0.8), {})
+        self.assertEqual(options("gpt-4.1", 0.8), {"temperature": 0.8})
+
     def test_generation_launches_canonical_optimizer_with_same_python(self):
         # Load only the function under test: importing run.py would parse CLI
         # arguments and construct API clients.
@@ -135,8 +152,15 @@ class SizingTests(unittest.TestCase):
                 )
             ]
         )
+        options = next(
+            node
+            for node in tree.body
+            if isinstance(node, ast.FunctionDef) and node.name == "sampling_options"
+        )
         exec(
-            compile(ast.Module(body=[function], type_ignores=[]), "run.py", "exec"),
+            compile(
+                ast.Module(body=[options, function], type_ignores=[]), "run.py", "exec"
+            ),
             namespace,
         )
         with tempfile.TemporaryDirectory(prefix="sizing test ") as directory:

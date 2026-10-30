@@ -73,7 +73,8 @@ python optimize/circuit_optimizer_helper.py \
 ```
 
 For topology generation followed by sizing, use `run.py --task_id=59` and the
-`--sizing-trials`, `--sizing-jobs`, and `--sizing-runs` options. See
+`--sizing-trials`, `--sizing-jobs`, and `--sizing-runs` options. Tasks 51–66 enable
+sizing automatically; there is no `--optimize` option. See
 [the sizing guide](optimize/README.md) for installation, task/objective mapping,
 module requirements, and output descriptions.
 
